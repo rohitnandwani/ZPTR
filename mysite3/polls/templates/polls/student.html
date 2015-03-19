@@ -1,0 +1,23 @@
+{% if students_info_processed %}
+	<table>
+		<thead>
+			<tr>
+				<th>Student Name</th>
+				<th>Attendance date</th>
+				<th>Total Behavior Points</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for student_info in students_info_processed %}
+				<tr>
+					<td>{{ student_info.0 }}</td>
+					<td>{{ student_info.1 }}</td>
+					<td>{{ student_info.2 }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
