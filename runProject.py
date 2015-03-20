@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 import checkPath
+import sys
 #import virtualenv
 
 OSName = platform.system()
@@ -14,7 +15,8 @@ os.chdir(os.path.join(myPath, 'requiredPackages'))
 if(OSName=='Windows'):
     #subprocess.call("msiexec /i python-2.7.9.msi TARGETDIR=\""+ os.getcwd() + "\\Python27\" /qb", shell=True)
     subprocess.call("msiexec.exe /i mongodb-win32-x86_64-2008plus-ssl-3.0.0-signed.msi INSTALLLOCATION=\""+ os.getcwd() +"\\mongodb-win\" ADDLOCAL=ALL /qb", shell=True)
-    pythonExeMain = "\"" + os.getcwd() + "\\Python27\\python\""
+    #pythonExeMain = "\"" + os.getcwd() + "\\Python27\\python\""
+    pythonExeMain = "\"" + os.path.dirname(os.path.realpath(sys.executable)) + "\\python\""
 if(OSName=='Linux'):
     pythonExeMain = os.path.join(os.sep + 'usr', 'bin', 'python')
     subprocess.call(pythonExeMain+" get-pip.py", shell=True)
