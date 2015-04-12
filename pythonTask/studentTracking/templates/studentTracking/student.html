@@ -1,0 +1,35 @@
+<head>
+	<title>Student records</title>
+	
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+
+<body>
+{% if students_info_processed %}
+	<br>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Student Name</th>
+				<th>Attendance date</th>
+				<th>Total Behavior Points</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for student_info in students_info_processed %}
+				<tr>
+					<td>{{ student_info.0 }}</td>
+					<td>{{ student_info.1 }}</td>
+					<td>{{ student_info.2 }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% else %}
+    <p>No student data is entered</p>
+{% endif %}
+</body>

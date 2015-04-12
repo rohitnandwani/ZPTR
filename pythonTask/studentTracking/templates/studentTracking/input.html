@@ -1,0 +1,100 @@
+<!doctype html>
+<html ng-app="b2">
+<head>
+    <title>Input data</title>
+    
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.js"></script>
+</head>
+<body>
+
+
+
+<form role="form" ng-controller="registerCtrl" name="form1" novalidate>
+	<fieldset>
+	<legend>Add student</legend>
+		<input class="form-control" placeholder="Student ID" type="number" name="studentid" ng-model="studentInput.student_id" required/><br>
+			<div class="error" 
+				ng-show="form1.studentid.$dirty && form1.studentid.$invalid">
+				<small class="error" 
+					ng-show="form1.studentid.$error.required">
+					Student ID is required.
+				</small>
+				<small class="error" 
+					ng-show="form1.studentid.$error.number">
+					Student ID should be a number.
+				</small>
+			</div>
+
+		 <input class="form-control" placeholder="Student Name" type="text" name="studentname" ng-model="studentInput.student_name" ng-minlength=3 ng-maxlength=20 required/><br>
+			<div class="error" 
+				ng-show="form1.studentname.$dirty && form1.studentname.$invalid">
+					<small class="error" 
+						ng-show="form1.studentname.$error.required">
+						Student Name is required.
+					</small>
+					<small class="error" 
+						ng-show="form1.studentname.$error.minlength">
+						Student Name is required to be at least 3 characters
+					</small>
+					<small class="error" 
+						ng-show="form1.studentname.$error.maxlength">
+						Student Name cannot be longer than 20 characters
+					</small>
+			</div>
+		 <input class="form-control" placeholder="Student Class" type="text" name="studentclass"  ng-model="studentInput.student_class" /><br>
+		 <input class="form-control" placeholder="Student Age" type="number" name="studentage" ng-model="studentInput.student_age"/><br>
+			<div class="error" 
+				ng-show="form1.studentage.$dirty && form1.studentage.$invalid">
+				<small class="error" 
+					ng-show="form1.studentage.$error.number">
+					Student age should be a number.
+				</small>
+			</div>
+
+	 <button type="button" class="btn" ng-disabled="form1.$invalid" ng-click="sendForm(studentInput)" type="submit">Submit</button><br>
+	</fieldset>
+</form>
+
+<br>
+<br>
+
+<form ng-controller="mainCtrl" name="form2">
+<fieldset>
+<table class="table">
+	<legend>Mark behavior and attandance</legend>
+        <thead>
+            <tr>
+                <th>Student</th>
+                <!--Stopped working in django <th ng-repeat="x in behavior">{{x.behavior_name}}</th>-->
+				<th>Doing Homework</th>
+				<th>Disrupting Class</th>
+				<th>Helping</th>
+				<th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><select class="form-control" name="studentSelect" ng-model="behaviorInput.student_id" ng-options="x.student_name for x in student" required></select></td>
+				<td class="col-xs-2" ng-repeat="x in behavior"><input type="checkbox" name={{x.behavior_name}} value={{x.behavior_points}} ng-model="behaviorInput[$index]"></td>
+				<td><input class="form-control" type="date" name="attendancedate" ng-model="behaviorInput.attendance_date"><br></td>
+            </tr>
+        </tbody>
+</table>
+
+
+<button type="button" class="btn" ng-disabled="form2.$invalid" ng-click="sendForm2(behaviorInput)" type="submit">Submit</button><br>
+</fieldset>
+</form>
+
+
+	<script src="{{ STATIC_URL }}js/app_new.js"></script>
+</body>
+</html>
