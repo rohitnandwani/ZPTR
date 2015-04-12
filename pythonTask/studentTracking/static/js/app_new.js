@@ -29,7 +29,12 @@ app.service('getData', function(Restangular) {
 	
 
 	this.addStudent = function(newStudent) {
-		studentList.push(newStudent);
+		//studentList.push(newStudent);
+		//Not the best way to update the studentList. But using only the statement above is giving a silly error.
+		return Restangular.all('student/?format=json').getList().then(function(resultStudent) {
+				studentList.push(resultStudent.pop());
+				//console.log(resultStudent.pop());
+			});	
 	}
 
 });
