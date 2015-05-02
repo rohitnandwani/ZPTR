@@ -1,5 +1,11 @@
 
 
+The working project is hosted on:
+http://python-task-round.herokuapp.com/input/
+http://python-task-round.herokuapp.com/student/
+
+Also, the AngularJS code is in the pythonTask/static folder.
+
 ##Running the script:
 
   runProject.py is a python script that sets up the project on Windows and Linux systems, tested on Windows 7,8 and Ubuntu 14.10.
